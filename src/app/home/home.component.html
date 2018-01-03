@@ -1,0 +1,11 @@
+
+
+<div>
+  <div *ngIf="!isAuth">
+    <app-registration></app-registration>
+  </div>
+  <div *ngIf="isAuth">
+    Welcome!
+    <button (click) = "logout()">Logout</button>
+  </div>
+</div>

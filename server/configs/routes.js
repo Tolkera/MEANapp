@@ -1,19 +1,27 @@
 const fs = require('fs');
 const path = require('path');
 
+var users = require('../controllers/users');
+
 module.exports = function(app, dir) {
 
-    app.get('/api', (req, res) => {
-        res.send('api route');
-    });
+    app.post('/api/users', users.createUser );
 
     app.get('*', (req, res) => {
-
-        let data = 'user test data insertion';
+        var userData = null;
+        if (req.user) {
+            userData = JSON.stringify({
+                username: req.user.username,
+                firstName: req.user.firstName,
+                categories: req.user.categories,
+                sprints: req.user.sprints
+            })
+        }
         let fileContents;
+
         fs.readFile(path.join(dir, 'dist/main.html'), 'utf-8', (err, file)=>{
             if (err) throw err;
-            fileContents = file.replace("UserData", data);
+            fileContents = file.replace("UserData", userData);
             res.send(fileContents);
         });
     });
