@@ -1,11 +1,14 @@
-<div>
+<div class="home">
   <div *ngIf="!isAuth">
     <app-registration></app-registration>
 
     <app-login></app-login>
   </div>
-  <div *ngIf="isAuth">
-    Welcome, {{user.firstName}}
+  <div *ngIf="isAuth"  >
+    <div id="welcome">
+    <h2 >Welcome, {{user.firstName}} </h2>
     <button (click) = "logout()">Logout</button>
+  </div>
+
   </div>
 </div>

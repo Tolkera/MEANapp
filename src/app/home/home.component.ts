@@ -14,16 +14,14 @@ export class HomeComponent implements OnInit {
     constructor (private userService: UserService,
                private authenticationService: AuthenticationService) {
     };
-    isAuth = this.authenticationService.isAuthenticated();
-    user: User = this.authenticationService.getCurrentUser();
+    isAuth= false;
+    user: User;
 
     ngOnInit() {
-        this.isAuth = this.authenticationService.getCurrentUser();
+        this.updateUserState();
         this.authenticationService.userLoggedIn$.subscribe(
             data => {
-                this.user = this.authenticationService.getCurrentUser();
-                console.log(this.user);
-                this.isAuth = this.authenticationService.isAuthenticated();
+                this.updateUserState()
             });
     }
 
@@ -32,4 +30,8 @@ export class HomeComponent implements OnInit {
             .subscribe();
     }
 
+    updateUserState(){
+        this.user = this.authenticationService.getCurrentUser();
+        this.isAuth = !!this.user;
+    }
 }

@@ -20,7 +20,6 @@ export class AuthenticationService {
 
   setCurrentUser(user){
     window.bootstrappedUserObject = user;
-    console.log(window.bootstrappedUserObject, 'setting')
     this.userAuthed();
   };
 
