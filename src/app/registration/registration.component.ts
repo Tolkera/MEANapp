@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import {UserService} from '../services/user.service';
+import {User} from '../types/user';
 //import {NotifierService} from '../services/notifier.service'
-//import { RouterModule, Router,  ActivatedRoute}   from '@angular/router';
-//import { regFormTemplate } from './registration-form.html';
 
 @Component({
   selector: 'app-registration',
@@ -13,43 +11,38 @@ import {UserService} from '../services/user.service';
 export class RegistrationComponent implements OnInit {
 
   constructor(private userService: UserService) { }
+    user = {} as User;
 
-  model = {
-    username: '',
-    firstName: '',
-    password: '',
-    passwordRepeat: ''
-  };
+    submitted = false;
+    active = true;
 
-  submitted = false;
-  onSubmit(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.submitted = true;
+    onSubmit(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.submitted = true;
 
-    if (this.model.password == this.model.passwordRepeat) {
+        if (this.user.password == this.user.passwordRepeat) {
 
-      this.userService.addUser(this.model)
-          .subscribe(
-              res  => {
-                console.log(res);
-                //if (!res.success){
-                //  this.notifierService.error('Please check the credentials!');
-                //} else {
-                //  this.notifierService.notify('Welcome!');
-                //  this.active = false;
-                //}
-                //this.submitted = false;
-                //this.router.navigate([''])
-              },
-              error =>  {
-                //this.notifierService.notify(error);
-                this.submitted = false;
-              }
-          );
+          this.userService.addUser(this.user)
+              .subscribe(
+                  res  => {
+                    console.log(res);
+                    if (!res.success){
+                     // this.notifierService.error('Please check the credentials!');
+                    } else {
+                    //  this.notifierService.notify('Welcome!');
+                      this.active = false;
+                    }
+                    this.submitted = false;
+                  },
+                  error =>  {
+                    //this.notifierService.notify(error);
+                    this.submitted = false;
+                  }
+              );
+        }
     }
-  }
-  active = true;
+
 
   ngOnInit() {
   }

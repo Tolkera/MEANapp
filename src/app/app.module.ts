@@ -4,11 +4,12 @@ import { FormsModule }   from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 import { UserService } from './services/user.service';
-
+import { AuthenticationService } from './services/authentication.service';
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -16,14 +17,15 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
   ],
-  providers: [UserService],
+  providers: [UserService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

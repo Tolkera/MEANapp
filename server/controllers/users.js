@@ -1,9 +1,9 @@
 var User = require('mongoose').model('User'),
-    encrypt = require('../utilities/encryption');
+    encrypt = require('../utilities/encryption'),
+    pluckData = require('../utilities/pluck-data').user;
 
 exports.createUser = function(req, res, next){
     var userData = req.body;
-    console.log(req.body);
     userData.username = userData.username.toLowerCase();
     userData.salt = encrypt.createSalt();
     userData.hashedPwd = encrypt.hashedPwd(userData.salt, userData.password);
@@ -19,7 +19,7 @@ exports.createUser = function(req, res, next){
 
         req.logIn(user, function(err){
             if(err){return next(err)}
-            res.send({success: true, user: user});
+            res.send(pluckData(user));
         })
     })
 };
@@ -47,7 +47,7 @@ exports.updateUser = function(req, res, next){
             req.status(400);
             return res.send({reason: err.toString()})
         } else {
-            res.send(req.user)
+            res.send(pluckData(req.user))
         }
     })
 };

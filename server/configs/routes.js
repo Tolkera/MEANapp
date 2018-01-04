@@ -1,21 +1,25 @@
 const fs = require('fs');
 const path = require('path');
 
-var users = require('../controllers/users');
+var users = require('../controllers/users'),
+    auth = require('./auth'),
+    pluckData = require('../utilities/pluck-data').user;
 
 module.exports = function(app, dir) {
 
     app.post('/api/users', users.createUser );
 
+    app.get('/logout', function(req, res){
+        req.logout();
+        res.send({success: true});
+    });
+
+    app.post('/api/login', auth.authenticate);
+
     app.get('*', (req, res) => {
         var userData = null;
         if (req.user) {
-            userData = JSON.stringify({
-                username: req.user.username,
-                firstName: req.user.firstName,
-                categories: req.user.categories,
-                sprints: req.user.sprints
-            })
+            userData = JSON.stringify(pluckData(req.user))
         }
         let fileContents;
 

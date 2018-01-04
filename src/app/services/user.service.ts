@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,30 +12,41 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private authenticationService: AuthenticationService) { }
+
 
   addUser (user): Observable<any>{
     const userUrl = '/api/users';
 
     return this.http.post(userUrl, user, httpOptions).pipe(
-        tap((res) => {console.log(res)}),
+        tap((res) => {
+          this.authenticationService.setCurrentUser(res);
+        }),
         catchError(this.handleError)
     );
   };
 
+  logoutUser(){
+    const userUrl = '/logout';
+    return this.http.get(userUrl, httpOptions).pipe(
+        tap((res) => {this.authenticationService.setCurrentUser(null)}),
+        catchError(this.handleError)
+    );
+  };
 
-  private extractData(res) {
-    let body = JSON.parse(res._body);
-    let user;
-    if (body.user) {
-      user = {_id: body.user._id, username: body.user.username, firstName: body.user.firstName};
-    }
- //   this.authenticationService.setCurrentUser(user);
-
-    return body || { };
+  loginUser(user){
+    const userUrl = '/api/login';
+    return this.http.post(userUrl, user, httpOptions).pipe(
+        tap((res) => {
+          this.authenticationService.setCurrentUser(res);
+        }),
+        catchError(this.handleError)
+    );
   }
 
   private handleError (error: Response | any) {
+    console.log(error)
     var err = "";
 
     if (error._body) {
@@ -45,9 +57,5 @@ export class UserService {
     }
 
     return Observable.throw(err);
-  }
-
-  private log(message: string) {
-    console.log('added')
   }
 }

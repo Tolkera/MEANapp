@@ -1,11 +1,11 @@
-
-
 <div>
   <div *ngIf="!isAuth">
     <app-registration></app-registration>
+
+    <app-login></app-login>
   </div>
   <div *ngIf="isAuth">
-    Welcome!
+    Welcome, {{user.firstName}}
     <button (click) = "logout()">Logout</button>
   </div>
 </div>
