@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import {User} from '../types/user';
 
@@ -7,11 +7,13 @@ import {User} from '../types/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService) { }
-
+  @ViewChild('regForm') form;
   user = {} as User;
+  active = true;
   onSubmit(event) {
     event.stopPropagation();
     event.preventDefault();
@@ -27,9 +29,5 @@ export class LoginComponent implements OnInit {
         )
   };
 
-  active = true;
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {};
 }

@@ -46,7 +46,6 @@ export class UserService {
   }
 
   private handleError (error: Response | any) {
-    console.log(error)
     var err = "";
 
     if (error._body) {
@@ -59,3 +58,4 @@ export class UserService {
     return Observable.throw(err);
   }
 }
+

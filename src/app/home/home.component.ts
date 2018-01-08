@@ -27,7 +27,10 @@ export class HomeComponent implements OnInit {
 
     logout(){
         this.userService.logoutUser()
-            .subscribe();
+            .subscribe(
+                data => {
+                    this.updateUserState();
+                })
     }
 
     updateUserState(){

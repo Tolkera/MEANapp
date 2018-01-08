@@ -12,7 +12,6 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private userService: UserService) { }
     user = {} as User;
-
     submitted = false;
     active = true;
 
@@ -26,7 +25,6 @@ export class RegistrationComponent implements OnInit {
           this.userService.addUser(this.user)
               .subscribe(
                   res  => {
-                    console.log(res);
                     if (!res.success){
                      // this.notifierService.error('Please check the credentials!');
                     } else {

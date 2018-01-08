@@ -6,6 +6,7 @@ import { DebugElement }    from '@angular/core';
 import { HomeComponent } from './home.component';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { Observable } from 'rxjs';
 
 describe('HomeComponent', () => {
   let comp:    HomeComponent;
@@ -18,10 +19,14 @@ describe('HomeComponent', () => {
       authService;
 
   beforeEach(async(() => {
-    userServiceStub = {};
+    userServiceStub = {
+      logoutUser: function(){
+        return Observable.of(false);
+      }
+    };
 
     authServiceStub = {
-      getCurrentUser: function(){return false},
+      getCurrentUser: function(){return  {firstName: "Bubba"}},
       userLoggedIn$: {
         subscribe: function(){return {}}
       }
@@ -49,20 +54,37 @@ describe('HomeComponent', () => {
   }));
 
   it('should NOT show welcome block if user is NOT logged in', () => {
+    authService.getCurrentUser = function(){return false};
     fixture.detectChanges();
     expect(el.querySelectorAll('#welcome').length).toBe(0)
   });
 
   it('should show welcome block if user is logged in', () => {
-    authService.getCurrentUser = function(){return  {firstName: "Bubba"}};
     fixture.detectChanges();
     expect(el.querySelectorAll('#welcome').length).toBe(1)
   });
 
   it('should contain username if the user is logged in', () => {
-    authService.getCurrentUser = function(){return {firstName: "Bubba"}};
     fixture.detectChanges();
     let content = el.textContent;
     expect(content).toContain('Bubba')
+  });
+
+
+  it('should call logout when user click on logout button', () => {
+    spyOn(userService, 'logoutUser');
+    fixture.detectChanges();
+    let button = el.querySelector('#logout') as HTMLElement;
+    button.click();
+    fixture.detectChanges();
+    expect(userService.logoutUser).toHaveBeenCalled()
+  });
+
+  it('should logout the user when logout() method is called', () => {
+    fixture.detectChanges();
+    authService.getCurrentUser = function(){return false};
+    spyOn(userService, 'logoutUser').and.callThrough();
+    comp.logout();
+    expect(comp.isAuth).toEqual(false)
   });
 });
