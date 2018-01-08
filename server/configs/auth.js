@@ -8,7 +8,7 @@ exports.authenticate = function(req, res, next){
         if(!user) {
             var loginErr = new Error('Incorrect login data');
             res.status(400);
-            return res.send({reason: loginErr.toString()})
+            return res.send({reason: loginErr.toString(), code:103})
         }
 
         req.logIn(user, function(err){

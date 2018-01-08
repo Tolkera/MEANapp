@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 
-
 declare var window:any;
 
 @Injectable()

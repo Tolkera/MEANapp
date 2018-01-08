@@ -1,22 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewContainerRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import 'rxjs/add/observable/throw';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+
 @Injectable()
 export class UserService {
 
   constructor(private http: HttpClient,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService) {}
 
 
-  addUser (user): Observable<any>{
+  addUser (user){
     const userUrl = '/api/users';
 
     return this.http.post(userUrl, user, httpOptions).pipe(
@@ -45,17 +47,9 @@ export class UserService {
     );
   }
 
-  private handleError (error: Response | any) {
-    var err = "";
+  handleError (error: Response | any) {
 
-    if (error._body) {
-      const body = JSON.parse(error._body);
-      err = body.reason || JSON.stringify(body.reason);
-    } else {
-      err = 'Unexpected error'
-    }
-
-    return Observable.throw(err);
+    return Observable.throw(error);
   }
-}
 
+}

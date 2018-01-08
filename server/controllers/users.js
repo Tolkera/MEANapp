@@ -14,7 +14,7 @@ exports.createUser = function(req, res, next){
                 err = new Error('Duplicate user name')
             }
             res.status(400);
-            return res.send({reason: err.toString()})
+            return res.send({reason: err.toString(), code: 101})
         }
 
         req.logIn(user, function(err){

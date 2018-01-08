@@ -10,7 +10,9 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { NotifierService } from './services/notifier.service';
 
 
 @NgModule({
@@ -24,8 +26,12 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastModule.forRoot()
   ],
-  providers: [UserService, AuthenticationService],
+  providers: [UserService,
+    AuthenticationService,
+    NotifierService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
