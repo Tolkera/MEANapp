@@ -8,4 +8,4 @@ module.exports = {
             tasks: user.tasks
         }
     }
-}
+};

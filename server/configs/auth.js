@@ -1,5 +1,5 @@
-var passport = require('passport'),
-    pluckData = require('../utilities/pluck-data').user;
+const passport = require('passport');
+const pluckData = require('../utilities/pluck-data').user;
 
 exports.authenticate = function(req, res, next){
     req.body.username = req.body.username.toLocaleLowerCase();

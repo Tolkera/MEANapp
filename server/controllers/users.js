@@ -1,6 +1,6 @@
-var User = require('mongoose').model('User'),
-    encrypt = require('../utilities/encryption'),
-    pluckData = require('../utilities/pluck-data').user;
+const User = require('mongoose').model('User');
+const encrypt = require('../utilities/encryption');
+const pluckData = require('../utilities/pluck-data').user;
 
 exports.createUser = function(req, res, next){
     var userData = req.body;

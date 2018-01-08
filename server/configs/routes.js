@@ -1,9 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-
-var users = require('../controllers/users'),
-    auth = require('./auth'),
-    pluckData = require('../utilities/pluck-data').user;
+const users = require('../controllers/users');
+const auth = require('./auth');
+const pluckData = require('../utilities/pluck-data').user;
 
 module.exports = function(app, dir) {
 

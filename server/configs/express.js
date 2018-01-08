@@ -4,7 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
-const   session = require('express-session');
+const session = require('express-session');
 
 module.exports = function(app, config){
 

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose'),
-    userModel = require('../models/user');
+const mongoose = require('mongoose');
+const userModel = require('../models/user');
 
 module.exports = function(config){
 
