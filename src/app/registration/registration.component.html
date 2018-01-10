@@ -29,14 +29,15 @@
                    [(ngModel)]="user.password" #password="ngModel" name="password" >
         </div>
         <div class="form-group">
-            <label for="alterEgo">Password repeat</label>
+            <label for="alterEgo">Repeat the password </label>
             <input type="password" class="form-control" id="passwordRepeat" required
                    [(ngModel)]="user.passwordRepeat" #passwordRepeat="ngModel" name="passwordRepeat" >
         </div>
-        <div [hidden]="!submitted && password != passwordRepeat"
-             class="alert alert-danger">
-            Passwords are not the same!
+        <div [hidden]="!submitted">
+            <div class="alert alert-danger" [hidden]="user.password == user.passwordRepeat ">
+                Passwords are not the same!
+            </div>
         </div>
-        <button type="submit" class="btn btn-default" [disabled]="!regForm.form.valid">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!regForm.form.valid">Submit</button>
     </form>
 </div>

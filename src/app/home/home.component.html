@@ -1,15 +1,23 @@
-<div class="home">
+<div class="app__home container">
   <div *ngIf="!isAuth">
-    <app-registration></app-registration>
 
-    <app-login></app-login>
+    <div class="row ">
+      <div class="col-sm app-home__col">
+        <app-login></app-login>
+      </div>
+      <div class="col-sm app-home__col">
+        <app-registration></app-registration>
+      </div>
+
+    </div>
+
   </div>
   <div *ngIf="isAuth"  >
     <div id="welcome">
-    <h2 >Welcome, {{user.firstName}} </h2>
-
+    <div >Welcome, {{user.firstName}}
+      <button id="logout" class="btn btn-outline-secondary" (click) = "logout()">Logout</button>
+    </div>
       <app-profile></app-profile>
-    <button id="logout" (click) = "logout()">Logout</button>
   </div>
 
   </div>

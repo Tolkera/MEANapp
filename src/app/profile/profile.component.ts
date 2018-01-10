@@ -8,7 +8,7 @@ import { AuthenticationService } from '../services/authentication.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.scss']
 })
 
 
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
         this.userService.updateUser(this.user)
             .subscribe(
                 res  => {
-                    this.notifierService.showSuccess('Your account has been created');
+                    this.notifierService.showSuccess('Your account has been updated!');
                     this.active = false;
                     this.submitted = false;
                     this.user.password = '';
