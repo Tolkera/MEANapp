@@ -10,11 +10,13 @@ exports.createUser = function(req, res, next){
 
     User.create(userData, function(err, user){
         if (err){
-            if(err.toString().indexOf('E11000') > -1){
-                err = new Error('Duplicate user name')
-            }
             res.status(400);
-            return res.send({reason: err.toString(), code: 101})
+            var code = null;
+            if(err.toString().indexOf('E11000') > -1){
+                err = new Error('Duplicate user name');
+                code = 101;
+            }
+            return res.send({reason: err.toString(), code: code})
         }
 
         req.logIn(user, function(err){
@@ -44,8 +46,13 @@ exports.updateUser = function(req, res, next){
 
     req.user.save(function(err){
         if(err){
-            req.status(400);
-            return res.send({reason: err.toString()})
+            res.status(400);
+            var code = null;
+            if(err.toString().indexOf('E11000') > -1){
+                err = new Error('Duplicate user name');
+                code = 101;
+            }
+            return res.send({reason: err.toString(), code: code});
         } else {
             res.send(pluckData(req.user))
         }

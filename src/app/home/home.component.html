@@ -7,6 +7,8 @@
   <div *ngIf="isAuth"  >
     <div id="welcome">
     <h2 >Welcome, {{user.firstName}} </h2>
+
+      <app-profile></app-profile>
     <button id="logout" (click) = "logout()">Logout</button>
   </div>
 

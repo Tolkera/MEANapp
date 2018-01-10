@@ -29,6 +29,17 @@ export class UserService {
     );
   };
 
+  updateUser (user){
+    const userUrl = '/api/users';
+
+    return this.http.put(userUrl, user, httpOptions).pipe(
+        tap((res) => {
+          this.authenticationService.setCurrentUser(res);
+        }),
+        catchError(this.handleError)
+    );
+  };
+
   logoutUser(){
     const userUrl = '/logout';
     return this.http.get(userUrl, httpOptions).pipe(

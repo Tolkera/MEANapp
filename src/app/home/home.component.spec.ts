@@ -6,6 +6,7 @@ import { DebugElement }    from '@angular/core';
 import { HomeComponent } from './home.component';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { NotifierService } from '../services/notifier.service';
 import { Observable } from 'rxjs';
 
 describe('HomeComponent', () => {
@@ -17,12 +18,19 @@ describe('HomeComponent', () => {
       userService;
   let authServiceStub,
       authService;
+  let notifierServiceStub,
+      notifierService;
 
   beforeEach(async(() => {
     userServiceStub = {
       logoutUser: function(){
         return Observable.of(false);
       }
+    };
+
+    notifierServiceStub = {
+      showSuccess: function(){},
+      showError: function(){}
     };
 
     authServiceStub = {
@@ -38,7 +46,8 @@ describe('HomeComponent', () => {
       ],
       providers: [
         {provide: UserService, useValue: userServiceStub },
-        {provide: AuthenticationService, useValue: authServiceStub }
+        {provide: AuthenticationService, useValue: authServiceStub },
+        {provide: NotifierService, useValue: notifierServiceStub }
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
@@ -49,6 +58,7 @@ describe('HomeComponent', () => {
 
     authService = fixture.debugElement.injector.get(AuthenticationService);
     userService = fixture.debugElement.injector.get(UserService);
+    notifierService = fixture.debugElement.injector.get(NotifierService);
     de = fixture.debugElement.query(By.css('.home'));
     el = de.nativeElement;
   }));

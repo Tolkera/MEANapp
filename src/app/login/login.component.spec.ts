@@ -7,6 +7,8 @@ import { LoginComponent } from './login.component';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { Observable } from 'rxjs';
+import { NotifierService } from '../services/notifier.service';
+import { User } from '../types/user';
 
 describe('LoginComponent', () => {
   let comp:    LoginComponent;
@@ -18,6 +20,9 @@ describe('LoginComponent', () => {
       userService;
   let authServiceStub,
       authService;
+  let notifierServiceStub,
+      notifierService;
+  let user: User;
 
   beforeEach(async(() => {
 
@@ -27,6 +32,11 @@ describe('LoginComponent', () => {
       }
     };
 
+    notifierServiceStub = {
+      showSuccess: function(){},
+      showError: function(){}
+    };
+
     TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [
@@ -34,7 +44,8 @@ describe('LoginComponent', () => {
       ],
       providers: [
         {provide: UserService, useValue: userServiceStub },
-        {provide: AuthenticationService, useValue: authServiceStub }
+        {provide: AuthenticationService, useValue: authServiceStub },
+        {provide: NotifierService, useValue: notifierServiceStub }
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
@@ -45,6 +56,7 @@ describe('LoginComponent', () => {
 
     authService = fixture.debugElement.injector.get(AuthenticationService);
     userService = fixture.debugElement.injector.get(UserService);
+    notifierService = fixture.debugElement.injector.get(NotifierService);
     de = fixture.debugElement.query(By.css('#login'));
     el = de.nativeElement;
     submitBtn = el.querySelector('button[type="submit"]') as HTMLElement;

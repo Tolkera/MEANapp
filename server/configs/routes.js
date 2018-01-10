@@ -7,7 +7,7 @@ const pluckData = require('../utilities/pluck-data').user;
 module.exports = function(app, dir) {
 
     app.post('/api/users', users.createUser );
-
+    app.put('/api/users', users.updateUser );
     app.get('/logout', function(req, res){
         req.logout();
         res.send({success: true});

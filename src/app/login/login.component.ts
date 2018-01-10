@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import {User} from '../types/user';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { errorCodes } from '../common/error-map';
 import { NotifierService } from '../services/notifier.service';
 
@@ -14,7 +13,6 @@ import { NotifierService } from '../services/notifier.service';
 export class LoginComponent implements OnInit  {
 
   constructor(private userService: UserService,
-              public toastr: ToastsManager,
               private notifierService: NotifierService) {
  }
   @ViewChild('regForm') form;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {User} from '../types/user';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { errorCodes } from '../common/error-map';
 import { NotifierService } from '../services/notifier.service';
 
@@ -13,8 +12,7 @@ import { NotifierService } from '../services/notifier.service';
 export class RegistrationComponent{
 
   constructor(private userService: UserService,
-              private notifierService: NotifierService,
-              public toastr: ToastsManager) { }
+              private notifierService: NotifierService) { }
     user = {} as User;
     submitted = false;
     active = true;
