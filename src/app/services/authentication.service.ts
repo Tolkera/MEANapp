@@ -10,7 +10,7 @@ export class AuthenticationService {
   userLoggedIn$= this.userLoggedInSource.asObservable();
 
   userAuthed() {
-    this.userLoggedInSource.next();
+    this.userLoggedInSource.next(this.getCurrentUser());
   };
 
   getCurrentUser(){

@@ -1,3 +1,27 @@
-<div>
-  <app-home></app-home>
+<div class="container">
+
+  <nav class="" *ngIf="!!user">
+    <div class="row">
+      <div class="col-sm">
+        <ul class="">
+          <li class="nav-item app-nav-item">
+            <a class="nav-link" href="">Profile</a>
+          </li>
+          <li class="nav-item app-nav-item">
+            <a class="nav-link" href="#">Tasks</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm">
+
+        <div class="pull">Welcome, {{user.firstName}}
+          <button id="logout" class="btn btn-outline-secondary" (click) = "logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <router-outlet></router-outlet>
 </div>

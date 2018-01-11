@@ -12,10 +12,8 @@ import { NotifierService } from '../services/notifier.service';
 
 export class LoginComponent implements OnInit  {
 
-  constructor(private userService: UserService,
-              private notifierService: NotifierService) {
+  constructor(private userService: UserService) {
  }
-  @ViewChild('regForm') form;
   user = {} as User;
   active = true;
   onSubmit(event) {
@@ -23,14 +21,7 @@ export class LoginComponent implements OnInit  {
     event.preventDefault();
 
     this.userService.loginUser(this.user)
-        .subscribe(
-            res  => {
-              this.notifierService.showSuccess('You are in');
-            },
-            data => {
-                this.notifierService.showError(data.error.code);
-            }
-        )
+        .subscribe()
   };
   ngOnInit(){}
 }

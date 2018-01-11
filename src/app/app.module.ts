@@ -14,6 +14,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { NotifierService } from './services/notifier.service';
 import { ProfileComponent } from './profile/profile.component';
+import { Router } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -29,11 +31,20 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     ToastModule.forRoot()
   ],
-  providers: [UserService,
+  providers: [
+    UserService,
     AuthenticationService,
-    NotifierService],
-  bootstrap: [AppComponent]
+    NotifierService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

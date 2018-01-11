@@ -1,15 +1,37 @@
-import { Component,ViewContainerRef } from '@angular/core';
+import { Component,ViewContainerRef, OnInit } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { AuthenticationService } from './services/authentication.service';
+import { User } from './types/user';
+import { UserService } from './services/user.service';
+import { NotifierService } from './services/notifier.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor (public toastr: ToastsManager,
-               public vcr: ViewContainerRef) {
+               public vcr: ViewContainerRef,
+               private authenticationService: AuthenticationService,
+                private userService: UserService) {
 
     this.toastr.setRootViewContainerRef(vcr);
   };
+
+  user = null as User;
+
+  ngOnInit(){
+    this.user = this.authenticationService.getCurrentUser();
+
+    this.authenticationService.userLoggedIn$.subscribe(
+        data => {
+          this.user = data;
+        });
+  }
+
+  logout(){
+    this.userService.logoutUser()
+        .subscribe();
+  }
 }

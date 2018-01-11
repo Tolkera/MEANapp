@@ -13,8 +13,7 @@ import { NotifierService } from '../services/notifier.service';
 })
 export class RegistrationComponent{
 
-  constructor(private userService: UserService,
-              private notifierService: NotifierService) {
+  constructor(private userService: UserService) {
 
   }
     user = {} as User;
@@ -30,17 +29,13 @@ export class RegistrationComponent{
 
           this.userService.addUser(this.user)
               .subscribe(
-                  res  => {
-                      this.notifierService.showSuccess('Your account has been created');
+                  res  => {},
+                  error => {},
+                  () => {
+                      this.submitted = false;
+                      this.active = false;
                       this.user.password = '';
                       this.user.passwordRepeat = '';
-                      this.active = false;
-                      this.submitted = false;
-
-                  },
-                  data => {
-                      this.notifierService.showError(data.error.code || 1);
-                      this.submitted = false;
                   }
               );
         }

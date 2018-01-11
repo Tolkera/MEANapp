@@ -15,7 +15,6 @@ import { AuthenticationService } from '../services/authentication.service';
 export class ProfileComponent implements OnInit {
 
     constructor(private userService: UserService,
-                private notifierService: NotifierService,
                 private authenticationService: AuthenticationService) { }
     user = {} as User;
     submitted = false;
@@ -32,16 +31,13 @@ export class ProfileComponent implements OnInit {
 
         this.userService.updateUser(this.user)
             .subscribe(
-                res  => {
-                    this.notifierService.showSuccess('Your account has been updated!');
-                    this.active = false;
+                res  => {},
+                error => {},
+                () => {
                     this.submitted = false;
+                    this.active = false;
                     this.user.password = '';
                     this.user.passwordRepeat = '';
-                },
-                data => {
-                    this.notifierService.showError(data.error.code || 1);
-                    this.submitted = false;
                 }
             );
 

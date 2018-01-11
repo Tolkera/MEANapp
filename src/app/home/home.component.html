@@ -1,5 +1,5 @@
 <div class="app__home container">
-  <div *ngIf="!isAuth">
+  <div *ngIf="!user">
 
     <div class="row ">
       <div class="col-sm app-home__col">
@@ -12,11 +12,9 @@
     </div>
 
   </div>
-  <div *ngIf="isAuth"  >
+  <div *ngIf="!!user"  >
     <div id="welcome">
-    <div >Welcome, {{user.firstName}}
-      <button id="logout" class="btn btn-outline-secondary" (click) = "logout()">Logout</button>
-    </div>
+
       <app-profile></app-profile>
   </div>
 

@@ -13,38 +13,17 @@ import { NotifierService } from '../services/notifier.service';
 
 export class HomeComponent implements OnInit {
 
-    constructor (private userService: UserService,
-                 private authenticationService: AuthenticationService,
-                 private notifierService: NotifierService){
-
-    };
-    isAuth= false;
+    constructor (
+        private authenticationService: AuthenticationService){};
     user: User;
 
     ngOnInit() {
-        this.updateUserState();
+        this.user = this.authenticationService.getCurrentUser();
+        
         this.authenticationService.userLoggedIn$.subscribe(
             data => {
-                this.updateUserState();
+                this.user = data;
             });
-
-    }
-
-    logout(){
-        this.userService.logoutUser()
-            .subscribe(
-                data => {
-                    this.updateUserState();
-                    this.notifierService.showSuccess('Bye-bye');
-                },
-                data => {
-                    this.notifierService.showError(data.error.code || 1);
-                })
-    }
-
-    updateUserState(){
-        this.user = this.authenticationService.getCurrentUser();
-        this.isAuth = !!this.user;
     }
 
 }
