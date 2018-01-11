@@ -16,6 +16,7 @@ import { NotifierService } from './services/notifier.service';
 import { ProfileComponent } from './profile/profile.component';
 import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
     RegistrationComponent,
     HomeComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

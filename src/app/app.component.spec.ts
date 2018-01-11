@@ -90,7 +90,6 @@ describe('AppComponent', () => {
         expect(content).toContain('Bubba')
     });
 
-
     it('should call logout when user click on logout button', () => {
         spyOn(userService, 'logoutUser');
         fixture.detectChanges();
