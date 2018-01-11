@@ -3,7 +3,8 @@ import {UserService} from '../services/user.service';
 import {User} from '../types/user';
 import { errorCodes } from '../common/error-map';
 import { NotifierService } from '../services/notifier.service';
-
+import { Subject }    from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class RegistrationComponent{
   constructor(private userService: UserService) {
 
   }
+    private componentDestroyed: Subject<any> = new Subject();
     user = {} as User;
     submitted = false;
     active = true;
@@ -28,6 +30,7 @@ export class RegistrationComponent{
         if (this.user.password == this.user.passwordRepeat) {
 
           this.userService.addUser(this.user)
+              .takeUntil(this.componentDestroyed)
               .subscribe(
                   res  => {},
                   error => {},
@@ -39,5 +42,10 @@ export class RegistrationComponent{
                   }
               );
         }
+    }
+
+    ngOnDestroy() {
+        this.componentDestroyed.next();
+        this.componentDestroyed.complete();
     }
 }

@@ -6,11 +6,11 @@ declare var window:any;
 @Injectable()
 
 export class AuthenticationService {
-  private userLoggedInSource = new Subject<boolean>();
-  userLoggedIn$= this.userLoggedInSource.asObservable();
+  private userAuthenticateSource = new Subject<any>();
+  onAuthenticate= this.userAuthenticateSource.asObservable();
 
   userAuthed() {
-    this.userLoggedInSource.next(this.getCurrentUser());
+    this.userAuthenticateSource.next(this.getCurrentUser());
   };
 
   getCurrentUser(){

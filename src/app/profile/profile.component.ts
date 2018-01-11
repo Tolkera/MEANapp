@@ -4,6 +4,8 @@ import {User} from '../types/user';
 import { errorCodes } from '../common/error-map';
 import { NotifierService } from '../services/notifier.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { Subject }    from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +18,7 @@ export class ProfileComponent implements OnInit {
 
     constructor(private userService: UserService,
                 private authenticationService: AuthenticationService) { }
+    private componentDestroyed: Subject<any> = new Subject();
     user = {} as User;
     submitted = false;
     active = true;
@@ -30,6 +33,7 @@ export class ProfileComponent implements OnInit {
         }
 
         this.userService.updateUser(this.user)
+            .takeUntil(this.componentDestroyed)
             .subscribe(
                 res  => {},
                 error => {},
@@ -40,11 +44,14 @@ export class ProfileComponent implements OnInit {
                     this.user.passwordRepeat = '';
                 }
             );
-
     }
 
     ngOnInit(){
-
         this.user = this.authenticationService.getCurrentUser();
+    }
+
+    ngOnDestroy() {
+        this.componentDestroyed.next();
+        this.componentDestroyed.complete();
     }
 }
