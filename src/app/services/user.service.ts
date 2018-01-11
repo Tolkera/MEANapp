@@ -14,15 +14,10 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
- // self: any;
-
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService,
               private  notifierService: NotifierService) {
-  //  self = this;
   }
-
-
 
   addUser (user){
     const userUrl = '/api/users';
