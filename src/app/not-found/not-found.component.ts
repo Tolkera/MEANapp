@@ -7,30 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() {
-  }
-
   ngOnInit() {
 
-    let parallaxElem = document.querySelectorAll('.js-parallax');
-
+     let parallaxElem = Array.from(document.querySelectorAll('.js-parallax'));
 
     let settings = {
       method: 'mouse',
-      mouseSpeed: 50
+      mouseSpeed: 30
     };
 
     window.onmousemove = function (e) {
       var pageX = e.pageX;
       var pageY = e.pageY;
-
-
-      parallaxElem.forEach((elem)=>{
+      parallaxElem.forEach((elem:HTMLElement)=>{
         elem.style.left = pageX/settings.mouseSpeed + 'px';
-        elem.style.top = pageY/settings.mouseSpeed + 'px';
-       // console.log(pageX/settings.mouseSpeed)
+        elem.style.top = pageY/(settings.mouseSpeed) + 'px';
       });
     }
-
   }
 }
