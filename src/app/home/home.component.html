@@ -1,11 +1,11 @@
-<div class="app__home container ">
+<div class="app__home app-container ">
   <div *ngIf="!user">
 
-    <div class="row ">
-      <div class="col-sm app-home__col">
+    <div class="app-grid">
+      <div class="app-grid__item app-grid__item--1-2">
         <app-login></app-login>
       </div>
-      <div class="col-sm app-home__col">
+      <div class="app-grid__item app-grid__item--1-2">
         <app-registration></app-registration>
       </div>
     </div>

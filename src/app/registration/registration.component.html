@@ -1,43 +1,43 @@
 <div id="register" >
     <h1>Register</h1>
     <form  (ngSubmit)="onSubmit($event);" #regForm="ngForm">
-        <div class="form-group">
+        <div class="">
             <label for="username">Name</label>
-            <input type="text" class="form-control" id="username"
+            <input type="text" class="app-form-control" id="username"
                    required
                    [(ngModel)]="user.username" name="username"
                    #username="ngModel" >
             <div [hidden]="username.valid || username.pristine"
-                 class="alert alert-danger">
+                 class="app-alert app-margin--xxs">
                 Username is required
             </div>
         </div>
-        <div class="form-group">
+        <div class="app-margin--s">
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName"
+            <input type="text" class="app-form-control" id="firstName"
                    required
                    [(ngModel)]="user.firstName" name="firstName"
                    #firstName="ngModel" >
             <div [hidden]="firstName.valid || firstName.pristine"
-                 class="alert alert-danger">
+                 class="app-alert app-margin--xxs">
                 First name is required
             </div>
         </div>
-        <div class="form-group">
+        <div class="app-margin--s">
             <label for="alterEgo">Password</label>
-            <input type="password" class="form-control"  id="alterEgo"   required
+            <input type="password" class="app-form-control"  id="alterEgo"   required
                    [(ngModel)]="user.password" #password="ngModel" name="password" >
         </div>
-        <div class="form-group">
+        <div class="app-margin--s">
             <label for="alterEgo">Repeat the password </label>
-            <input type="password" class="form-control" id="passwordRepeat" required
+            <input type="password" class="app-form-control" id="passwordRepeat" required
                    [(ngModel)]="user.passwordRepeat" #passwordRepeat="ngModel" name="passwordRepeat" >
         </div>
         <div [hidden]="!submitted">
-            <div class="alert alert-danger" [hidden]="user.password == user.passwordRepeat ">
+            <div class="app-alert app-margin--xxs" [hidden]="user.password == user.passwordRepeat ">
                 Passwords are not the same!
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!regForm.form.valid">Submit</button>
+        <button type="submit" class="app-btn app-btn--attention app-margin--m" [disabled]="!regForm.form.valid">Submit</button>
     </form>
 </div>

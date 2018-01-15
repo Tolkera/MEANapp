@@ -1,0 +1,99 @@
+
+.cf:before,
+.cf:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cancel {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  color: $color-background;
+  margin-left: 10px;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.edit {
+  display: none;
+}
+
+.editable {
+  &:hover {
+    .edit {
+      display: inline-block;
+    }
+  }
+}
+
+.in-bl {
+  display: inline-block;
+}
+
+.app-margin--m {
+  margin-top: 15px;
+}
+
+
+.app-margin--s {
+  margin-top: 10px;
+}
+
+.app-margin--xs {
+  margin-top: 5px;
+}
+
+.app-margin--xxs {
+  margin-top: 2px;
+}
+
+.color--attention {
+  color: $color-attention;
+}
+
+.color--branding {
+  color: $color-branding--light
+}
+
+.color--background {
+  color: $color-background;
+}
+
+
+.message {
+  font-size: 20px;
+  margin: 50px 0;
+  text-align: center;
+  font-family: $font-heading;
+
+  @media(max-width: $mobile){
+    margin: 25px 0;
+    font-size: 16px;
+  }
+}
+
+.standard-margin {
+  margin-top: 20px;
+}
+
+.app-container {
+  max-width: 900px;
+}
+
+.app-link-item {
+  font-family: $font-heading;
+  font-size: 16px;
+
+  &:active,
+  &:hover {
+    background: $color-attention !important;
+  }
+}
+

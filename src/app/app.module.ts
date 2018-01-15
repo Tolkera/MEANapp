@@ -12,12 +12,17 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
-import { NotifierService } from './services/notifier.service';
+
 import { ProfileComponent } from './profile/profile.component';
 import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TasksComponent } from './tasks/tasks.component';
 
+import { NotifierService } from './services/notifier.service';
+import { TasksService } from './services/task.service';
+import { CategoryService } from './services/category.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeComponent,
     LoginComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
@@ -39,14 +45,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
   providers: [
     UserService,
     AuthenticationService,
-    NotifierService
+    NotifierService,
+    TasksService,
+    CategoryService,
+    AuthGuardService
   ],
   bootstrap: [
     AppComponent
   ]
 })
 export class AppModule {
-  constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
-  }
 }

@@ -1,0 +1,18 @@
+.app-category-item {
+  border-bottom: 1px solid #303030;
+  margin-bottom: 50px;
+  list-style: none;
+}
+
+.app-category__name {
+  cursor: pointer;
+}
+
+.app-category__name-edit {
+  margin-left: 8px;
+  font-size: 20px;
+}
+
+.app-add-category-form {
+  margin-top: 20px;
+}

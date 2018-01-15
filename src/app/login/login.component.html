@@ -1,26 +1,26 @@
 <div id="login">
   <h1>Login</h1>
   <form (ngSubmit)="onSubmit($event);" #regForm="ngForm">
-    <div class="form-group">
+    <div class="app-margin--s">
       <label for="name">Username</label>
-      <input type="text" class="form-control" id="name"
+      <input type="text" class="app-form-control" id="name"
              required
              [(ngModel)]="user.username" name="name"
              #name="ngModel" >
       <div [hidden]="name.valid || name.pristine"
-           class="alert alert-danger">
+           class="app-alert app-margin--xxs">
         Name is required
       </div>
     </div>
-    <div class="form-group">
+    <div class="app-margin--s">
       <label for="pass">Password</label>
-      <input type="password" class="form-control"  id="pass"   required
+      <input type="password" class="app-form-control"  id="pass"   required
              [(ngModel)]="user.password" #password="ngModel" name="password" >
     </div>
     <div [hidden]="password.valid || password.pristine"
-         class="alert alert-danger">
+         class="app-alert app-margin--xxs">
       Password is required
     </div>
-    <button type="submit" class="btn btn-primary btn-lg" [disabled]="!user.username || !user.password">Submit</button>
+    <button type="submit" class="app-btn app-btn--attention app-margin--m" [disabled]="!user.username || !user.password">Submit</button>
   </form>
 </div>

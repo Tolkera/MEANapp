@@ -3,6 +3,8 @@ const path = require('path');
 const users = require('../controllers/users');
 const auth = require('./auth');
 const pluckData = require('../utilities/pluck-data').user;
+const tasks = require('../controllers/tasks');
+const categories = require('../controllers/categories');
 
 module.exports = function(app, dir) {
 
@@ -12,6 +14,16 @@ module.exports = function(app, dir) {
         req.logout();
         res.send({success: true});
     });
+
+    app.post('/api/tasks', tasks.createTask);
+    app.get('/api/tasks', tasks.getTasks);
+    app.put('/api/tasks/:id', tasks.updateTask);
+    app.delete('/api/tasks/:id', tasks.deleteTask);
+
+    app.post('/api/categories', categories.createCategory);
+    app.get('/api/categories', categories.getCategories);
+    app.put('/api/categories/:id', categories.updateCategory);
+    app.delete('/api/categories/:id', categories.deleteCategory);
 
     app.post('/api/login', auth.authenticate);
 

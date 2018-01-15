@@ -1,0 +1,36 @@
+.app-btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.app-btn--attention {
+  background: $color-attention;
+  color: #fff;
+
+  &:hover {
+    background: lighten($color-attention, 5%);
+  }
+
+  &:active,
+  &:focus {
+    background: lighten($color-attention, 10%);
+  }
+
+  &:disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+}

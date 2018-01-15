@@ -1,4 +1,44 @@
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4{
+  font-weight: 400;
+  font-family: $font-heading;
+}
+
+label {
+  font-weight: normal;
+}
+
+body {
+  font-family: $font-ordinary;
+  background: #222;
+  color: #fff;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+header.navbar {
+  margin-bottom: 30px;
+}
+
 img {
   max-width: 100%;
   height: auto;
+}
+
+footer {
+  margin-top: 100px;
+}
+
+ul,
+ol {
+  list-style: none;
 }

@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import 'rxjs/add/observable/throw';
 import { NotifierService } from './notifier.service';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,7 +17,8 @@ const httpOptions = {
 export class UserService {
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService,
-              private  notifierService: NotifierService) {
+              private  notifierService: NotifierService,
+              private router: Router) {
   }
 
   addUser (user){
@@ -47,8 +49,9 @@ export class UserService {
     const userUrl = '/logout';
     return this.http.get(userUrl, httpOptions).pipe(
         tap((res) => {
-          this.authenticationService.setCurrentUser(null);
-          this.notifierService.showSuccess('Bye-bye');
+            this.authenticationService.setCurrentUser(null);
+            this.notifierService.showSuccess('Bye-bye');
+            this.router.navigate(['/'])
         }),
         catchError(this.handleError.bind(this))
     );
