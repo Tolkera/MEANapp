@@ -45,7 +45,7 @@ export class CategoryService {
 
         return this.http.put(url, category, httpOptions).pipe(
             tap((res) => {
-                this.notifierService.showSuccess('Your category has been created');
+                this.notifierService.showSuccess('Updated!');
             }),
             catchError(this.handleError.bind(this))
         );
@@ -56,7 +56,7 @@ export class CategoryService {
 
         return this.http.delete(url, httpOptions).pipe(
             tap((res) => {
-                this.notifierService.showSuccess('Your category has been deleted');
+                this.notifierService.showSuccess('Deleted');
             }),
             catchError(this.handleError.bind(this))
         );

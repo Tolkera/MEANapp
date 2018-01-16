@@ -1,47 +1,44 @@
 import {Component, OnInit } from '@angular/core';
-import {UserService} from '../services/user.service';
-import {NotifierService} from '../services/notifier.service';
-import {RouterModule, Router,  ActivatedRoute}   from '@angular/router';
 import {CategoryService} from '../services/category.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { TasksService } from '../services/task.service';
 import { User } from '../types/user';
+import {Category} from '../types/category';
 
 @Component({
   selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss']
+  templateUrl: './tasks.component.html'
 })
 export class TasksComponent implements OnInit {
 
-  constructor (private notifierService: NotifierService,
-               private categoryService: CategoryService,
+  constructor (private categoryService: CategoryService,
                private authenticationService: AuthenticationService,
                private tasksService: TasksService
   ) {}
 
     user: User;
+    categories: Category[] = [];
+    newCategory = '';
 
   ngOnInit() {
 
       this.user = this.authenticationService.getCurrentUser();
-    this.categoryService.getCategories(this.authenticationService.getCurrentUser()._id)
+      this.categoryService.getCategories(this.authenticationService.getCurrentUser()._id)
         .subscribe(
             res  => {
-              this.categories = res;
+              this.categories = <any>res;
             }
         );
   }
 
-  newCategory = '';
-  categories = [];
+
 
   addCategory(){
     this.categoryService.addCategory({name: this.newCategory, userId: this.user._id })
         .subscribe(
             res  => {
                 this.newCategory = '';
-                this.categories.push(res);
+                this.categories.push(<any>res);
             }
         );
   };
@@ -49,6 +46,7 @@ export class TasksComponent implements OnInit {
   saveEditedCategory(category){
     this.categoryService.updateCategory(category)
         .subscribe();
+
   };
 
     deleteCategory(category, index){
@@ -63,6 +61,11 @@ export class TasksComponent implements OnInit {
         }
     }
 
+    saveEditedTask(task){
+        this.tasksService.updateTask(task)
+            .subscribe();
+    };
+
     addTask(category, newTask){
         let taskData = {name: newTask, done: false, category: category._id};
         this.tasksService.addTask(taskData)
@@ -74,5 +77,17 @@ export class TasksComponent implements OnInit {
                 }
             );
     };
+
+    deleteTask(category, task, index){
+
+        if (confirm('Sure?')) {
+            this.tasksService.deleteTask(task)
+                .subscribe(
+                    res  => {
+                        category.tasks.splice(index, 1);
+                    }
+                );
+        }
+    }
 
 }

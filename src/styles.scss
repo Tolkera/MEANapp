@@ -1,28 +1,22 @@
-$mobile: 768px;
-$tablet: 1200px;
-@import url(https://fonts.googleapis.com/css?family=Oswald:400,300,700);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
-$color-attention: #872D62;
-$color-background: #B8B8B8;
-$color-branding--dark: #0A4700;
-$color-branding--light: #258cd1;
-$color-error: #e74c3c;
-$font-ordinary: 'Roboto', sans-serif;
-$font-heading: 'Oswald', sans-serif;
-
 @import "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
 @import "scss/base/normalize";
+@import "scss/base/vars";
 @import "scss/base/base";
+
 
 @import "scss/base/utils";
 @import "scss/layout/grid";
 @import "scss/layout/container";
 
 @import "scss/blocks/nav";
+@import "scss/blocks/heading";
 @import "scss/blocks/category";
 @import "scss/blocks/task";
 @import "scss/blocks/form";
 @import "scss/blocks/btn";
 @import "scss/blocks/alert";
+@import "scss/blocks/header";
+@import "scss/blocks/not-found";
+@import "scss/blocks/home";
 
 

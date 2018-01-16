@@ -9,9 +9,9 @@ import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  templateUrl: './registration.component.html'
 })
+
 export class RegistrationComponent{
 
   constructor(private userService: UserService) {

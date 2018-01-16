@@ -1,9 +1,9 @@
 <div id="login">
-  <h1>Login</h1>
-  <form (ngSubmit)="onSubmit($event);" #regForm="ngForm">
-    <div class="app-margin--s">
+  <h2 class="app-heading--secondary">Login</h2>
+  <form (ngSubmit)="onSubmit($event);" #regForm="ngForm" class="app-margin--l">
+    <div class="">
       <label for="name">Username</label>
-      <input type="text" class="app-form-control" id="name"
+      <input type="text" class="app-form-control app-margin--xs" id="name"
              required
              [(ngModel)]="user.username" name="name"
              #name="ngModel" >
@@ -14,7 +14,7 @@
     </div>
     <div class="app-margin--s">
       <label for="pass">Password</label>
-      <input type="password" class="app-form-control"  id="pass"   required
+      <input type="password" class="app-form-control app-margin--xs"  id="pass"   required
              [(ngModel)]="user.password" #password="ngModel" name="password" >
     </div>
     <div [hidden]="password.valid || password.pristine"

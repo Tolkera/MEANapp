@@ -3,10 +3,10 @@
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4,
-.h1, .h2, .h3, .h4{
+h1, h2, h3, h4 {
   font-weight: 400;
   font-family: $font-heading;
+  margin: 0;
 }
 
 label {
@@ -15,7 +15,7 @@ label {
 
 body {
   font-family: $font-ordinary;
-  background: #222;
+  background: #292929;
   color: #fff;
 }
 
@@ -23,10 +23,13 @@ button {
   padding: 0;
   border: 0;
   background: none;
+  outline: none;
+  transition: $transition;
 }
 
-header.navbar {
-  margin-bottom: 30px;
+a {
+  text-decoration: none;
+  transition: $transition;
 }
 
 img {
@@ -41,4 +44,6 @@ footer {
 ul,
 ol {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }

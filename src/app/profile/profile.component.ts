@@ -9,8 +9,7 @@ import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: './profile.component.html'
 })
 
 

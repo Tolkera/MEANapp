@@ -1,9 +1,9 @@
 <div id="register" >
-    <h1>Register</h1>
-    <form  (ngSubmit)="onSubmit($event);" #regForm="ngForm">
+    <h2 class="app-heading--secondary">Register</h2>
+    <form  (ngSubmit)="onSubmit($event);" #regForm="ngForm" class="app-margin--l">
         <div class="">
             <label for="username">Name</label>
-            <input type="text" class="app-form-control" id="username"
+            <input type="text" class="app-form-control app-margin--xs" id="username"
                    required
                    [(ngModel)]="user.username" name="username"
                    #username="ngModel" >
@@ -14,7 +14,7 @@
         </div>
         <div class="app-margin--s">
             <label for="firstName">First Name</label>
-            <input type="text" class="app-form-control" id="firstName"
+            <input type="text" class="app-form-control app-margin--xs" id="firstName"
                    required
                    [(ngModel)]="user.firstName" name="firstName"
                    #firstName="ngModel" >
@@ -25,12 +25,12 @@
         </div>
         <div class="app-margin--s">
             <label for="alterEgo">Password</label>
-            <input type="password" class="app-form-control"  id="alterEgo"   required
+            <input type="password" class="app-form-control app-margin--xs"  id="alterEgo"   required
                    [(ngModel)]="user.password" #password="ngModel" name="password" >
         </div>
         <div class="app-margin--s">
             <label for="alterEgo">Repeat the password </label>
-            <input type="password" class="app-form-control" id="passwordRepeat" required
+            <input type="password" class="app-form-control app-margin--xs" id="passwordRepeat" required
                    [(ngModel)]="user.passwordRepeat" #passwordRepeat="ngModel" name="passwordRepeat" >
         </div>
         <div [hidden]="!submitted">

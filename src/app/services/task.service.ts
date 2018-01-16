@@ -40,27 +40,27 @@ export class TasksService {
         );
     };
 
-    updateTask(category) {
-        //const url = '/api/categories/' + category._id;
-        //let headers = new Headers({ 'Content-Type': 'application/json' });
-        //let options = new RequestOptions({ headers: headers });
-        //
-        //return this.http.put(url, category, options)
-        //    .map(this.extractData, this)
-        //    .catch(this.handleError);
+    updateTask(task) {
+        const url = '/api/tasks/' + task._id;
+
+        return this.http.put(url, task, httpOptions).pipe(
+            tap((res) => {
+                this.notifierService.showSuccess('Your task has been updated');
+            }),
+            catchError(this.handleError.bind(this))
+        );
     };
 
-    deleteTask(category) {
-        //const url = '/api/categories/' + category._id;
-        //let headers = new Headers({ 'Content-Type': 'application/json' });
-        //let options = new RequestOptions({ headers: headers });
-        //
-        //return this.http.delete(url, options)
-        //    .map(this.extractData, this)
-        //    .catch(this.handleError);
+    deleteTask(task) {
+        const url = '/api/tasks/' + task._id;
+
+        return this.http.delete(url, httpOptions).pipe(
+            tap((res) => {
+                this.notifierService.showSuccess('Deleted');
+            }),
+            catchError(this.handleError.bind(this))
+        );
     };
-
-
 
     handleError (error: Response | any) {
         this.notifierService.showError(error.error ? error.error.code : 1);

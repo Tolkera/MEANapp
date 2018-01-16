@@ -1,77 +1,77 @@
-<div class="container">
+<div class="app-container">
     <div class="app-categories">
-        <div class="row">
-            <div class="col-sm-8">
+        <div class="app-grid">
+            <div class="app-grid__item app-grid__item--3-4 app-margin--xxl">
                 <ul class="" *ngIf="categories.length">
-                    <li *ngFor="let category of categories; let i = index" class="gm-category-item">
-                        <header class="category-item__header editable">
-                            <h3 *ngIf="!category.editingCategory" (click)="category.editingCategory = !category.editingCategory" class="gm-category__name">{{category.name}}
-                                <button class="edit gm-category__name-edit">
-                                    <span class="fa fa-pencil"></span>
-                                </button>
-                            </h3>
+                    <li *ngFor="let category of categories; let i = index" class="app-category-item">
+                        <header class="app-editable">
+                            <h4 *ngIf="!category.editingCategory" (click)="category.editingCategory = !category.editingCategory" class="app-heading--third ">
+                                {{category.name}}
+
+                                    <span class="app-edit fa fa-pencil"></span>
+
+                            </h4>
                         </header>
                         <div *ngIf="category.editingCategory">
-                            <form name="categoryEditForm" (ngSubmit)="category.editingCategory = false" class="form-inline">
-                                <input  [(ngModel)]="category.name"  name="categoryName" required="required" class="form-control" #categoryName="ngModel"/>
-                                <button (click)="saveEditedCategory(category)" type="submit" [disabled]="categoryName.errors" class="btn">
-                                    <span class="fa fa-check-circle"></span>
+                            <form name="categoryEditForm" (ngSubmit)="category.editingCategory = false" class="app-margin--m">
+                                <input  [(ngModel)]="category.name"  name="categoryName" required="required" class="app-form-control" #categoryName="ngModel"/>
+                                <button (click)="saveEditedCategory(category)" type="submit" [disabled]="categoryName.errors" class="app-btn app-btn--neutral app-margin--xs">
+                                    Save
                                 </button>
-                                <button (click)="deleteCategory(category, i)" class="btn text-muted">Delete</button>
-                                <div *ngIf="categoryName.errors" class="form-error">
+                                <button (click)="deleteCategory(category, i)" class="app-btn--link app-margin--left app-margin--xs">Delete</button>
+                                <div *ngIf="categoryName.errors" class="app-alert">
                                     <span>This shouldn't be empty!</span>
                                 </div>
                             </form>
                         </div>
-                        <ul class="gm-tasks">
-                            <li *ngFor="let task of category.tasks; let j = index" class="app-task">
-                                <div class="col-md-6"><span [hidden]="task.editing" (click)="task.editing = !task.editing" class="gm-task__name editable">
+                        <ul class="app-margin--m">
+                            <li *ngFor="let task of category.tasks; let j = index" class="app-task app-grid app-editable">
+                                <div class="app-grid__item--1-2"><span [hidden]="task.editing" (click)="task.editing = !task.editing" class="gm-task__name app-editable">
                         <span>{{task.name}}</span>
-                            <button class="edit">
+                            <button class="app-margin--left app-edit">
                                 <span class="fa fa-pencil"></span>
                             </button>
                         </span>
-                                    <form name="taskEditForm" *ngIf="task.editing" class="form-inline">
-                                        <input [(ngModel)]="task.name" name="taskName" required="required" class="form-control" #taskName="ngModel"/>
-                                        <button (click)="saveEditedTask(task)" type="submit" [disabled]="taskName.errors" class="btn">
-                                            <span class="fa fa-check-circle"></span>
+                                    <form name="taskEditForm" (ngSubmit)="task.editing = false"  *ngIf="task.editing" class="app-margin--xs">
+                                        <input [(ngModel)]="task.name" name="taskName" required="required" class="app-form-control" #taskName="ngModel"/>
+                                        <button (click)="saveEditedTask(task)" type="submit" [disabled]="taskName.errors" class="app-btn app-margin--s app-btn--neutral">
+                                            Save
                                         </button>
-                                        <div *ngIf="taskName.errors" class="form-error">
+                                        <div *ngIf="taskName.errors" class="app-alert">
                                             <span>This shouldn't be empty!</span>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="gm-task__details col-md-6 text-right">
-                                    <span class="text-muted">Created on {{task.created |date }}</span>
-                                    <button (click)="deleteTask(category, task, j)" class="gm-task__details-delete">Delete</button>
+                                <div class=" app-grid__item--1-2 app-text-right app-edit">
+                                    <span class="app-task__created">Created on {{task.created |date }}</span>
+                                    <button (click)="deleteTask(category, task, j)" class="app-btn--link">Delete</button>
                                 </div>
                             </li>
                         </ul>
-                        <div class="gm-add-task">
-                            <button class="btn gm-add-task__sign">
-                                <span *ngIf="!category.addingTask" (click)="category.addingTask = !category.addingTask" title="Add a new task!" class="fa fa-plus color--attention"></span>
+                        <div class="">
+                            <button class="btn">
+                                <span *ngIf="!category.addingTask" (click)="category.addingTask = !category.addingTask" title="Add a new task!" class="fa fa-plus app-margin--m app-add-task__trigger"></span>
                             </button>
                             <form name="addTaskForm" *ngIf="category.addingTask" (submit)="category.addingTask = false" class="gm-add-task-form form-inline">
                                 <div class="form-group">
-                                    <input [(ngModel)]="category.newTask" name="taskName" required="required" class="form-control"  #taskName="ngModel"/>
+                                    <input [(ngModel)]="category.newTask" name="taskName" required="required" class="app-form-control"  #taskName="ngModel"/>
                                 </div>
                                 <div class="form-group">
-                                    <button (click)="addTask(category, category.newTask)" [disabled]="taskName.$invalid" class="btn gm-attention">Add task</button>
-                                    <span (click)="category.addingTask = false" class="btn btn-link">Cancel</span>
+                                    <button (click)="addTask(category, category.newTask)" [disabled]="taskName.$invalid" class="app-btn app-btn--neutral app-margin--s">Add task</button>
+                                    <span (click)="category.addingTask = false" class="app-margin--left app-btn-link app-btn app-margin--s">Cancel</span>
                                 </div>
                             </form>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-4 gm-add-category-form">
-                <h4>Create a category</h4>
-                <form name="addCategoryForm">
-                    <input [(ngModel)]="newCategory" required="required" class="form-control form-group" name="newCategoryName"/>
-                    <button (click)="addCategory()"[disabled]="!newCategory || submitted" class="btn btn btn-block gm-attention form-group">Add</button>
+            <div class="app-grid__item app-grid__item--1-4 ">
+                <h4 class="app-heading--third app-margin--xxl ">Create a category</h4>
+                <form name="addCategoryForm" class="app-margin--m">
+                    <input [(ngModel)]="newCategory" required="required" class="app-form-control" name="newCategoryName"/>
+                    <button (click)="addCategory()"[disabled]="!newCategory || submitted" class="app-btn app-btn--attention app-margin--s">Add</button>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
