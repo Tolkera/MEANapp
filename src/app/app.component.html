@@ -2,9 +2,16 @@
 
   <div class="app-header">
     <div class="app-container">
-    <nav class="" *ngIf="!!user">
+    <nav class="">
       <div class="app-grid">
-        <div class="app-grid__item app-grid__item--1-2">
+        <div class="app-grid__item app-grid__item--1-4">
+          <div class="app-header__name">
+            Angular 5 App
+          </div>
+
+        </div>
+
+        <div class="app-grid__item app-grid__item--1-2" *ngIf="!!user">
           <ul class="">
             <li class="app-nav-item">
               <a class="app-nav-link" routerLinkActive="app-nav-link--active" routerLink="" [routerLinkActiveOptions]="{ exact: true }">Profile</a>
@@ -15,7 +22,7 @@
           </ul>
         </div>
 
-        <div class="app-grid__item app-grid__item--1-2">
+        <div class="app-grid__item app-grid__item--1-4"  *ngIf="!!user">
           <div class="app-header__user">Welcome, {{user.firstName}}
             <button id="logout" class="app-header__logout-btn app-btn app-btn--neutral" (click)="logout()">Logout</button>
           </div>
@@ -24,8 +31,20 @@
     </nav>
     </div>
   </div>
-
-
-
   <router-outlet></router-outlet>
+  <div class="app-container">
+
+  <div class="app-dimmed app-border  app-margin--xxl">
+
+      This is a simple Angular 5 / NodeJS / MongoDB app with basic functionality:
+      <br>
+      <br>
+      1. Registering, logging in and logging out <br>
+      2. Editing your profile after registration <br>
+      3. Creating categories of items, deleting them and updating them <br>
+      4. Routing (restricted for logged in, 404)
+    </div>
+
+
+  </div>
 </div>

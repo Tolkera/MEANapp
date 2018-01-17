@@ -1,5 +1,6 @@
 .app-header{
   background: #375a7f;
+  min-height: 58px;
 }
 
 .app-header__user {
@@ -14,4 +15,11 @@
 
 .app-header__logout-btn {
   margin-left: 5px;
+}
+
+.app-header__name {
+  font-size: 30px;
+  font-family: $font-heading;
+  margin-top: 10px;
+  color: #dfd1f7;
 }
