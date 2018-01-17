@@ -4,6 +4,13 @@ var Category = require('mongoose').model('Category'),
 
 exports.createCategory = function(req, res, next){
     var categoryData = {name: req.body.name};
+
+    if(!req.body.name){
+        var err = new Error('Name for the category is missing');
+        res.status(400);
+        return res.send({reason: err.toString(), code: 105})
+    }
+
     categoryData.date = new Date();
 
     Category.create(categoryData, function(err, category){

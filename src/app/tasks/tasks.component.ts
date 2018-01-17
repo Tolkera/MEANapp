@@ -70,7 +70,6 @@ export class TasksComponent implements OnInit {
         this.tasksService.addTask(taskData)
             .subscribe(
                 res  => {
-                    console.log(res);
                     category.tasks.push(res);
                     category.newTask = "";
                 }

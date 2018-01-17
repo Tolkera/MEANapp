@@ -41,8 +41,6 @@ export class CategoryService {
 
     updateCategory(category) {
         const url = '/api/categories/' + category._id;
-        console.log(category)
-
         return this.http.put(url, category, httpOptions).pipe(
             tap((res) => {
                 this.notifierService.showSuccess('Updated!');

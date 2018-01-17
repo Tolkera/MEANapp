@@ -4,9 +4,19 @@ var Task = require('mongoose').model('Task'),
 exports.createTask = function(req, res, next){
     var taskData = req.body;
 
+    if(!taskData.name){
+
+        var err = new Error('Name for the task is missing');
+        res.status(400);
+        return res.send({reason: err.toString(), code: 105})
+    }
+
     taskData.created = new Date();
 
+
     Task.create(taskData, function(err, task){
+
+
         if (err){
             res.status(400);
             return res.send({reason: err.toString()})

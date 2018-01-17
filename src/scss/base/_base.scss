@@ -25,6 +25,11 @@ button {
   background: none;
   outline: none;
   transition: $transition;
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
 }
 
 a {
