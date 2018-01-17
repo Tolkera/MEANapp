@@ -20,38 +20,37 @@ export class TasksComponent implements OnInit {
     categories: Category[] = [];
     newCategory = '';
 
-  ngOnInit() {
+    ngOnInit() {
 
-      this.user = this.authenticationService.getCurrentUser();
-      this.categoryService.getCategories(this.authenticationService.getCurrentUser()._id)
-        .subscribe(
-            res  => {
-              this.categories = <any>res;
-            }
-        );
-  }
+        this.user = this.authenticationService.getCurrentUser();
 
+        this.categoryService.getCategories(this.user._id)
+            .subscribe(
+                res  => {
+                    this.categories = <any>res;
 
+                }
+            );
+    }
 
-  addCategory(){
-    this.categoryService.addCategory({name: this.newCategory, userId: this.user._id })
-        .subscribe(
-            res  => {
-                this.newCategory = '';
-                this.categories.push(<any>res);
-            }
-        );
-  };
+    addCategory(){
+        this.categoryService.addCategory({name: this.newCategory, userId: this.user._id })
+            .subscribe(
+                res  => {
+                    this.newCategory = '';
+                    this.categories.push(<any>res);
+                }
+            );
+    };
 
-  saveEditedCategory(category){
-    this.categoryService.updateCategory(category)
-        .subscribe();
-
-  };
+    saveEditedCategory(category){
+        this.categoryService.updateCategory(category)
+            .subscribe();
+    };
 
     deleteCategory(category, index){
 
-        if (confirm('Sure?')) {
+        if (confirm('Do you want to delete the category')) {
             this.categoryService.deleteCategory(category)
                 .subscribe(
                     res  => {
@@ -80,7 +79,7 @@ export class TasksComponent implements OnInit {
 
     deleteTask(category, task, index){
 
-        if (confirm('Sure?')) {
+        if (confirm('Do you want to delete the task?')) {
             this.tasksService.deleteTask(task)
                 .subscribe(
                     res  => {
@@ -89,5 +88,4 @@ export class TasksComponent implements OnInit {
                 );
         }
     }
-
 }

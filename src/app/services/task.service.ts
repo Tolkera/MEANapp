@@ -63,7 +63,7 @@ export class TasksService {
     };
 
     handleError (error: Response | any) {
-        this.notifierService.showError(error.error ? error.error.code : 1);
+        this.notifierService.showError(error.error.code ? error.error.code : 1);
         return Observable.throw(error);
     }
 }

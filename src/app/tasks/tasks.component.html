@@ -67,9 +67,9 @@
             </div>
             <div class="app-grid__item app-grid__item--1-4 ">
                 <h4 class="app-heading--third app-margin--xxl ">Create a category</h4>
-                <form name="addCategoryForm" class="app-margin--m">
+                <form name="addCategoryForm" class="app-margin--m" id="add-category">
                     <input [(ngModel)]="newCategory" required="required" class="app-form-control" name="newCategoryName"/>
-                    <button (click)="addCategory()"[disabled]="!newCategory || submitted" class="app-btn app-btn--attention app-margin--s">Add</button>
+                    <button (click)="addCategory()" type="submit" [disabled]="!newCategory || submitted" class="app-btn app-btn--attention app-margin--s">Add</button>
                 </form>
             </div>
         </div>

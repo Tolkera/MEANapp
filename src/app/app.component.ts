@@ -31,7 +31,6 @@ export class AppComponent implements OnInit{
         .takeUntil(this.componentDestroyed)
         .subscribe(
         data => {
-
           this.user = data;
         });
   }

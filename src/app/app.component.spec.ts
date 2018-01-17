@@ -28,9 +28,7 @@ describe('AppComponent', () => {
          user = {firstName: "Bubba"};
 
         userServiceStub = {
-            logoutUser: function(){
-
-            }
+            logoutUser: function(){}
         };
 
         notifierServiceStub = {
@@ -43,8 +41,10 @@ describe('AppComponent', () => {
 
         authServiceStub = {
             getCurrentUser: function(){return  user},
-            userLoggedIn$: {
-                subscribe: function(){return {}}
+            onAuthenticate: {
+                takeUntil: function(){
+                    return Observable.of(user)
+                },
             }
         };
 
@@ -80,7 +80,6 @@ describe('AppComponent', () => {
 
     it('should show welcome block if user is logged in', () => {
         fixture.detectChanges();
-        console.log(authService.getCurrentUser());
         expect(el.textContent).toContain('Welcome');
     });
 
