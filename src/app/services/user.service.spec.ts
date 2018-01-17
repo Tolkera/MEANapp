@@ -1,60 +1,48 @@
-//import { TestBed, inject, async, getTestBed } from '@angular/core/testing';
-//import { UserService } from './user.service';
-//import { AuthenticationService } from './authentication.service';
-//import { User } from '../types/user';
-//import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
-//import {
-//    HttpModule,
-//    Http,
-//    Response,
-//    ResponseOptions,
-//    XHRBackend,
-//
-//} from '@angular/http';
-//import { MockBackend } from '@angular/http/testing';
-//
-//describe('VideoService', () => {
-//    let authServiceStub,
-//        authService;
-//    let user: User;
-//
-//    beforeEach(() => {
-//
-//        authServiceStub = {
-//            isAuthenticated: function(user){return true}
-//        };
-//
-//        TestBed.configureTestingModule({
-//            imports: [HttpModule],
-//            providers: [
-//                UserService,
-//                {provide: HttpClient, deps: [MockBackend]},
-//                {provide: AuthenticationService, useValue: authServiceStub },
-//                { provide: XHRBackend, useClass: MockBackend },
-//            ]
-//        });
-//    });
-//
-//    describe('User', () => {
-//
-//        it('should return an Observable',
-//            inject([UserService, XHRBackend], (userService, mockBackend) => {
-//
-//                const mockResponse = {
-//                    name: 'Frou-Frou'
-//                };
-//
-//                console.log(mockBackend);
-//                mockBackend.connections.subscribe((connection) => {
-//                    connection.mockRespond(new Response(new ResponseOptions({
-//                        body: JSON.stringify(mockResponse)
-//                    })));
-//                });
-//
-//                userService.addUser().subscribe((res) => {
-//                    expect(res.length).toBe(4);
-//                });
-//
-//            }));
-//    });
-//});
+import { TestBed, async, inject } from '@angular/core/testing';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { UserService } from './user.service';
+import { AuthenticationService } from './authentication.service';
+import { NotifierService } from './notifier.service';
+import { Router } from '@angular/router';
+
+let notifierServiceStub = {
+    showSuccess: function(){},
+    showError: function(){}
+};
+describe(`User Service`, () => {
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                HttpClientModule,
+                HttpClientTestingModule
+            ],
+            providers: [
+                {  provide: Router, useValue: class {
+                        navigate = jasmine.createSpy("navigate")
+                    } },
+                UserService,
+                AuthenticationService,
+                {provide: NotifierService, useValue: notifierServiceStub }
+            ]
+        });
+    });
+
+    afterEach(inject([HttpTestingController], (backend: HttpTestingController) => {
+        backend.verify();
+    }));
+
+
+    it(`should pass the new user to auth service after registration`, async(inject([UserService, HttpTestingController, AuthenticationService],
+        (service: UserService, backend: HttpTestingController, authService: AuthenticationService) => {
+            spyOn(authService, 'setCurrentUser');
+            let newUser = {username: '1'};
+            service.addUser(newUser).subscribe((next) => {
+                expect(next).toEqual(newUser);
+                expect(authService.setCurrentUser).toHaveBeenCalledWith(newUser);
+            });
+
+            backend.expectOne('/api/users').flush(newUser, { status: 200, statusText: 'Ok' });
+        })));
+});
