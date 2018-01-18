@@ -2,6 +2,9 @@
   "name": "ang",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node" : "9.4.0"
+  },
   "scripts": {
     "start": "ng build --watch",
     "build": "ng build --prod",
