@@ -9,7 +9,7 @@ module.exports = {
     },
     production: {
         rootPath: rootPath,
-        db: ' process.env.db',
+        db: process.env.db,
         port: process.env.PORT || 80
     }
 };
